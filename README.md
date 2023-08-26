@@ -216,3 +216,115 @@ $$ v_y(t + \Delta t) = v_y(t) + \left( \frac{F_{thrust} \sin(\theta) - mg - F_{d
 
 
 By incorporating both air resistance and thrust (either constant or variable), this framework provides a more comprehensive simulation of projectile motion, especially for powered projectiles like rockets. Numerical methods are essential for solving these equations due to their nonlinear nature and the time-varying nature of thrust.
+
+# Control System for Rockets and Missiles
+
+A control system for rockets and missiles is a set of mechanisms and algorithms designed to maintain or achieve desired behaviors or trajectories during flight. Given the high speeds, dynamic environments, and critical missions of rockets and missiles, their control systems are intricate and vital for success.
+
+## Components of a Control System:
+
+1. **Sensors (Input Devices)**:
+    - Inertial Measurement Units (IMUs): Measure and report a rocket's velocity, orientation, and gravitational forces.
+    - GPS: Provides position and velocity data.
+    - Altimeters: Measure altitude.
+    - Star Trackers & Sun Sensors: Used in spacecraft for attitude determination.
+    - Temperature Sensors: Monitor the temperature of critical components.
+    - Pressure Sensors: Monitor pressure in fuel tanks or combustion chambers.
+
+2. **Actuators (Output Devices)**:
+    - Thrusters: Adjust the rocket's orientation or position.
+    - Gimballed Engines: Pivot to change the direction of thrust.
+    - Control Surfaces: Adjust their angle to change aerodynamic forces.
+    - Reaction Control Systems (RCS): Control attitude and position in space.
+
+3. **Controllers**:
+    - Onboard Computers: Process sensor data and execute control algorithms.
+    - PID Controllers: Adjust the system based on proportional, integral, and derivative terms.
+    - Adaptive Controllers: Adjust control parameters in real-time.
+    - Model Predictive Controllers: Use a model of the system to predict future behavior.
+
+4. **Control Algorithms**:
+    - Guidance Algorithms: Determine the desired path or trajectory.
+    - Navigation Algorithms: Determine the current position and velocity.
+    - Stabilization Algorithms: Ensure the rocket maintains a desired orientation.
+    - Flight Termination Systems (FTS): Safely terminate a flight in case of anomalies.
+
+5. **Communication Systems**:
+    - Telemetry: Transmits data from the rocket to ground stations.
+    - Command & Control Links: Allow ground stations to send commands.
+
+6. **Power Systems**:
+    - Batteries: Provide power to onboard electronics.
+    - Solar Panels: Generate power for long-duration missions.
+    - Power Management Systems: Distribute and regulate power.
+
+7. **Software & Firmware**:
+    - Real-time Operating Systems (RTOS): Ensure timely execution of tasks.
+    - Flight Software: Executes guidance, navigation, and control algorithms.
+    - Diagnostics Software: Monitors the health of onboard systems.
+
+8. **Redundancy & Fail-safes**:
+    - Backup Systems: Duplicate systems that can take over in case of failures.
+    - Isolation Mechanisms: Ensure that a failure in one system doesn't cascade to others.
+    - Safe Modes: Pre-defined states the rocket can enter in case of anomalies.
+
+9. **Ground Control Stations**:
+    - Monitoring Stations: Receive telemetry data and monitor the flight.
+    - Command Stations: Can send commands to the rocket or missile.
+    - Simulation & Testing Stations: Used pre-flight to simulate and validate control algorithms.
+
+## Example: Proportional Navigation (PN) Guidance
+
+Proportional Navigation is a guidance law used in moving-target engagement scenarios. The fundamental idea behind PN is to command an acceleration of the missile that is proportional to the line-of-sight (LOS) rate to the target.
+
+### Mathematical Representation:
+
+The basic PN equation can be represented as:
+$$ a_c = N \cdot V_r \cdot \dot{\lambda} $$
+
+Where:
+- $a_c$ is the commanded lateral acceleration.
+- $N$ is the navigation constant.
+- $V_r$ is the closing velocity.
+- $\dot{\lambda}$ is the rate of change of the line-of-sight angle.
+
+### Components:
+
+1. **Sensors**:
+   - Radar or Infrared Seekers: Detect and track the target.
+   - Gyroscopes: Measure angular movements.
+   - Accelerometers: Measure accelerations.
+
+2. **Actuators**:
+   - Control Fins: Adjust the missile's orientation and trajectory.
+   - Thrust Vectoring: Adjust the direction of the engine's thrust.
+
+3. **Onboard Computer**: 
+   - Processes data from the sensors.
+   - Implements the PN algorithm.
+   - Sends commands to the actuators.
+
+4. **Software**:
+   - Guidance Algorithm: Implements the PN guidance law.
+   - Stabilization Algorithm: Ensures the missile maintains its orientation.
+   - Target Tracking Algorithm: Processes data from the seekers.
+
+### Working:
+
+- The missile's sensors detect the target and measure the rate at which the line-of-sight angle to the target is changing.
+- The onboard computer calculates the required lateral acceleration using the PN guidance law.
+- Commands are sent to the missile's actuators to achieve this acceleration.
+- The missile adjusts its flight path to intercept the target.
+
+### Advantages:
+
+- Predictive: Effective against maneuvering targets.
+- Simplicity: The basic PN algorithm is relatively simple.
+- Versatility: Can be used in various scenarios.
+
+### Examples of Missiles Using PN:
+
+- AIM-9 Sidewinder: An air-to-air missile.
+- MIM-104 Patriot: A surface-to-air missile system.
+
+By incorporating both air resistance and thrust (either constant or variable), this framework provides a more comprehensive simulation of projectile motion, especially for powered projectiles like rockets. Numerical methods are essential for solving these equations due to their nonlinear nature and the time-varying nature of thrust.
