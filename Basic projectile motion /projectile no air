@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # acceleration due to gravity (m/s^2)
+
+# Initial conditions
+v0 = 50.0  # initial velocity (m/s)
+theta = 45.0  # launch angle (degrees)
+theta_rad = np.radians(theta)  # convert angle to radians
+
+# Time values
+t = np.linspace(0, 2*v0*np.sin(theta_rad)/g, num=1000)  # time range for the projectile to reach the ground
+
+# Calculate trajectory
+x = v0 * np.cos(theta_rad) * t
+y = v0 * np.sin(theta_rad) * t - 0.5 * g * t**2
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(x, y)
+plt.title("Projectile Motion")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.show()
