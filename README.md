@@ -60,3 +60,74 @@ Where:
 4. **Air Resistance**: In more detailed studies, air resistance can play a significant role, especially for objects moving at high speeds or for extended durations.
 
 By understanding these basics, one can predict and analyze the motion of projectiles in various scenarios, from sports to physics experiments.
+
+# Projectile Motion with Air Resistance
+
+When considering air resistance in projectile motion, the equations of motion become more complex due to the velocity-dependent drag force. Here's a detailed breakdown:
+
+## Drag Force
+
+The drag force, often referred to as air resistance, acting on an object moving through the air is given by:
+
+$$ F_{drag} = \frac{1}{2} \rho v^2 C_d A $$
+
+Where:
+- $\rho$ is the air density.
+- $v$ is the magnitude of the object's velocity.
+- $C_d$ is the drag coefficient, which depends on the shape of the object.
+- $A$ is the cross-sectional area of the object facing the direction of motion.
+
+## Equations of Motion
+
+The equations of motion can be broken down into horizontal (x-axis) and vertical (y-axis) components:
+
+### Horizontal Component
+
+$$ m \frac{dv_x}{dt} = -F_{drag,x} $$
+
+Where $F_{drag,x}$ is the horizontal component of the drag force and is given by:
+
+$$ F_{drag,x} = \frac{1}{2} \rho v v_x C_d A $$
+
+### Vertical Component
+
+$$ m \frac{dv_y}{dt} = -mg - F_{drag,y} $$
+
+Where $F_{drag,y}$ is the vertical component of the drag force and is given by:
+
+$$ F_{drag,y} = \frac{1}{2} \rho v v_y C_d A $$
+
+## Velocity Magnitude
+
+The overall velocity magnitude is:
+
+$$ v = \sqrt{v_x^2 + v_y^2} $$
+
+## Position Update
+
+The position of the projectile is updated based on its velocity:
+
+### Horizontal Position
+
+$$ x(t + \Delta t) = x(t) + v_x \Delta t $$
+
+### Vertical Position
+
+$$ y(t + \Delta t) = y(t) + v_y \Delta t $$
+
+## Velocity Update
+
+Using numerical methods, like the Euler method, the velocities are updated based on the forces acting on the projectile:
+
+### Horizontal Velocity
+
+$$ v_x(t + \Delta t) = v_x(t) + \frac{-F_{drag,x}}{m} \Delta t $$
+
+### Vertical Velocity
+
+$$ v_y(t + \Delta t) = v_y(t) + \left( \frac{-F_{drag,y}}{m} - g \right) \Delta t $$
+
+---
+
+These equations provide a comprehensive framework for simulating projectile motion with air resistance. Numerical methods are often used to solve these equations over discrete time steps due to their nonlinear nature.
+
