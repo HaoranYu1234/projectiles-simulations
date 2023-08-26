@@ -145,11 +145,23 @@ Where:
 - $C_d$ is the drag coefficient.
 - $A$ is the cross-sectional area of the object.
 
-## Thrust
+## Constant Thrust
 
-Thrust is the force exerted by the propulsion system of the projectile (like a rocket engine). It can vary with time, depending on the propulsion mechanism:
+For scenarios where the thrust remains constant during the burn time and then drops to zero:
 
-$$ F_{thrust} = F_{thrust}(t) $$
+$$ F_{thrust} = \text{constant (during burn time)} $$
+
+## Variable Thrust
+
+In more advanced scenarios, thrust can vary with time. For example, a simple sinusoidal variation for thrust can be:
+
+$$ F_{thrust}(t) = F_{max} \times \sin\left(\frac{\pi t}{burn\_time}\right) $$
+
+Where:
+- $F_{max}$ is the maximum thrust.
+- $burn\_time$ is the time over which the thrust is applied.
+
+This equation gives a thrust that starts from 0, peaks at the midpoint of the burn time, and then returns to 0 by the end of the burn time.
 
 ## Equations of Motion
 
@@ -201,4 +213,5 @@ $$ v_x(t + \Delta t) = v_x(t) + \left( \frac{F_{thrust} \cos(\theta) - F_{drag,x
 
 $$ v_y(t + \Delta t) = v_y(t) + \left( \frac{F_{thrust} \sin(\theta) - mg - F_{drag,y}}{m} \right) \Delta t $$
 
-By incorporating both air resistance and thrust, this framework provides a more comprehensive simulation of projectile motion, especially for powered projectiles like rockets. Numerical methods are essential for solving these equations due to their nonlinear nature and the time-varying nature of thrust.
+
+By incorporating both air resistance and thrust (either constant or variable), this framework provides a more comprehensive simulation of projectile motion, especially for powered projectiles like rockets. Numerical methods are essential for solving these equations due to their nonlinear nature and the time-varying nature of thrust.
