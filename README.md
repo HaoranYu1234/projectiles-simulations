@@ -1,4 +1,4 @@
-## Projectiles simulations: motivation behind this project
+# Projectiles simulations: motivation behind this project
 **Motivations Behind Simulating Projectiles, Rockets, and Missiles: A Comprehensive Exploration**
 
 In an era where technology is advancing at an unprecedented rate, the study and simulation of projectiles, rockets, and missiles have never been more pertinent. The motivations behind such a project are manifold, encompassing not only the realms of defense and space exploration but also education, environmental studies, and even entertainment.
