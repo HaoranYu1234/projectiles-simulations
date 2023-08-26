@@ -280,6 +280,7 @@ Proportional Navigation is a guidance law used in moving-target engagement scena
 ### Mathematical Representation:
 
 The basic PN equation can be represented as:
+
 $$ a_c = N \cdot V_r \cdot \dot{\lambda} $$
 
 Where:
