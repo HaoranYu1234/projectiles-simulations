@@ -1,3 +1,4 @@
+# This is random notes from ChatGPT and old knolwedge, not to be published
 # Projectiles simulations: motivation behind this project
 **Motivations Behind Simulating Projectiles, Rockets, and Missiles: A Comprehensive Exploration**
 
