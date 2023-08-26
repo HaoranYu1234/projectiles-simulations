@@ -1,0 +1,40 @@
+# Initial components of velocity
+vx = v0 * np.cos(theta_rad)
+vy = v0 * np.sin(theta_rad)
+
+# Lists to store trajectory data
+x = [0]
+y = [0]
+vx_list = [vx]
+vy_list = [vy]
+
+# Time step for Euler's method
+dt = 0.01
+
+# Simulation loop
+while y[-1] >= 0:
+    # Compute drag forces
+    v = np.sqrt(vx**2 + vy**2)
+    F_drag_x = -0.5 * rho * v * vx * Cd * A
+    F_drag_y = -0.5 * rho * v * vy * Cd * A
+
+    # Update velocities considering drag and gravity
+    vx += (F_drag_x/m) * dt
+    vy += (F_drag_y/m - g) * dt
+
+    # Update positions
+    x.append(x[-1] + vx*dt)
+    y.append(y[-1] + vy*dt)
+
+    # Store velocities
+    vx_list.append(vx)
+    vy_list.append(vy)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(x, y)
+plt.title("Projectile Motion with Air Resistance")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.show()
