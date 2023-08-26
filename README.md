@@ -128,4 +128,3 @@ $$ v_x(t + \Delta t) = v_x(t) + \frac{-F_{drag,x}}{m} \Delta t $$
 $$ v_y(t + \Delta t) = v_y(t) + \left( \frac{-F_{drag,y}}{m} - g \right) \Delta t $$
 
 These equations provide a comprehensive framework for simulating projectile motion with air resistance. Numerical methods are often used to solve these equations over discrete time steps due to their nonlinear nature.
-
