@@ -1,0 +1,69 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # acceleration due to gravity (m/s^2)
+rho = 1.225  # air density (kg/m^3)
+Cd = 0.47  # drag coefficient for a sphere
+A = 0.01  # cross-sectional area (m^2)
+m = 1.0  # mass of the projectile (kg)
+F_thrust = 100.0  # constant thrust (N)
+burn_time = 5.0  # time for which thrust is applied (s)
+
+# Initial conditions
+v0 = 50.0  # initial velocity (m/s)
+theta = 45.0  # launch angle (degrees)
+theta_rad = np.radians(theta)  # convert angle to radians
+
+# Initial components of velocity
+vx = v0 * np.cos(theta_rad)
+vy = v0 * np.sin(theta_rad)
+
+# Lists to store trajectory data
+x = [0]
+y = [0]
+vx_list = [vx]
+vy_list = [vy]
+
+# Time step for Euler's method
+dt = 0.01
+t = 0
+
+# Simulation loop
+while y[-1] >= 0:
+    # Compute drag forces
+    v = np.sqrt(vx**2 + vy**2)
+    F_drag_x = -0.5 * rho * v * vx * Cd * A
+    F_drag_y = -0.5 * rho * v * vy * Cd * A
+
+    # Apply thrust only during the burn time
+    if t < burn_time:
+        net_force_x = F_thrust * np.cos(theta_rad) + F_drag_x
+        net_force_y = F_thrust * np.sin(theta_rad) + F_drag_y - m * g
+    else:
+        net_force_x = F_drag_x
+        net_force_y = F_drag_y - m * g
+
+    # Update velocities considering drag, gravity, and thrust
+    vx += (net_force_x/m) * dt
+    vy += (net_force_y/m) * dt
+
+    # Update positions
+    x.append(x[-1] + vx*dt)
+    y.append(y[-1] + vy*dt)
+
+    # Store velocities
+    vx_list.append(vx)
+    vy_list.append(vy)
+
+    # Update time
+    t += dt
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(x, y)
+plt.title("Projectile Motion with Air Resistance and Thrust")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.grid(True)
+plt.show()
