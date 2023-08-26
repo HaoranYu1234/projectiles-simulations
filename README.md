@@ -32,25 +32,25 @@ Projectile motion refers to the motion of an object that is thrown or projected 
 
 ## Key Equations
 
-When an object is launched at an angle \( \theta \) with an initial velocity \( v_0 \), its horizontal (x-axis) and vertical (y-axis) motions can be described by the following equations:
+When an object is launched at an angle $\theta$ with an initial velocity $v_0$, its horizontal (x-axis) and vertical (y-axis) motions can be described by the following equations:
 
 ### Horizontal Motion
 
 The horizontal motion of a projectile is uniform, meaning the velocity remains constant. This is because there are no horizontal forces acting on the projectile (assuming no air resistance). The equation for horizontal motion is:
 
-\[ x(t) = v_0 \cos(\theta) t \]
+$$x(t) = v_0 \cos(\theta) t$$
 
 ### Vertical Motion
 
 The vertical motion of a projectile is influenced by the force of gravity, leading to a uniformly accelerated motion. The equation for vertical motion is:
 
-\[ y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2 \]
+$$y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2$$
 
 Where:
-- \( v_0 \) is the initial velocity.
-- \( \theta \) is the launch angle.
-- \( g \) is the acceleration due to gravity (approximately \( 9.81 m/s^2 \) on Earth).
-- \( t \) is time.
+- $v_0$ is the initial velocity.
+- $\theta$ is the launch angle.
+- $g$ is the acceleration due to gravity (approximately $9.81 m/s^2$ on Earth).
+- $t$ is time in seconds.
 
 ## Factors Affecting Projectile Motion
 
