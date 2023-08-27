@@ -1,4 +1,4 @@
-# This is random notes from ChatGPT and old knolwedge, not to be published
+# This is a changing research notes, contents are from textbooks and various websites.
 # Projectiles simulations: motivation behind this project
 **Motivations Behind Simulating Projectiles, Rockets, and Missiles: A Comprehensive Exploration**
 
