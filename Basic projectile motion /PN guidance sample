@@ -1,0 +1,100 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+
+class State:
+    def __init__(self, position, velocity):
+        self.position = np.array(position, dtype=float)
+        self.velocity = np.array(velocity, dtype=float)
+
+
+def line_of_sight_rate(prev_target_pos, curr_target_pos, prev_missile_pos,
+                       curr_missile_pos):
+    prev_los = prev_target_pos - prev_missile_pos
+    curr_los = curr_target_pos - curr_missile_pos
+    los_rate = (curr_los - prev_los) / dt
+    return los_rate
+
+
+def proportional_navigation(missile_state, target_state, N):
+    prev_los = target_state.position - missile_state.position
+    prev_los /= np.linalg.norm(prev_los)  # Normalize
+    los_rate = line_of_sight_rate(prev_target_pos=target_state.position,
+                                  curr_target_pos=target_state.position,
+                                  prev_missile_pos=missile_state.position - missile_state.velocity * dt,
+                                  curr_missile_pos=missile_state.position)
+
+    commanded_accel = N * np.cross(missile_state.velocity, los_rate)
+    return commanded_accel
+
+
+# Constants
+dt = 0.1
+N = 3  # Navigation ratio
+missile_speed = 1.0
+
+# Initial states
+missile_state = State(position=[0, 0, 0], velocity=[1, 0, 1])
+target_state = State(position=[10, 10, 10], velocity=[-0.5, 0.1, -0.5])
+
+# Lists for plotting
+missile_positions = [missile_state.position]
+target_positions = [target_state.position]
+
+for step in range(50000):
+    # Update target
+    target_state.position += target_state.velocity * dt
+    target_positions.append(target_state.position.copy())
+
+    # PN guidance to update missile
+    accel_command = proportional_navigation(missile_state, target_state, N)
+    missile_state.velocity += accel_command * dt
+    missile_state.velocity /= np.linalg.norm(
+        missile_state.velocity)  # Keep speed constant
+    missile_state.velocity *= missile_speed
+    missile_state.position += missile_state.velocity * dt
+    missile_positions.append(missile_state.position.copy())
+
+    # Check for intercept (distance is very small)
+    if np.linalg.norm(missile_state.position - target_state.position) < 0.1:
+        print("Intercepted!")
+        break
+
+missile_positions = np.array(missile_positions)
+target_positions = np.array(target_positions)
+
+# 3D plotting
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot trajectories
+ax.plot(missile_positions[:, 0], missile_positions[:, 1], missile_positions[:, 2], 'b-', label='Missile Path')
+ax.plot(target_positions[:, 0], target_positions[:, 1], target_positions[:, 2], 'r-', label='Target Path')
+
+# Mark the direction of the trajectories with arrows (using quiver)
+# We'll just use a few arrows for clarity, you can adjust the stride as needed
+stride = 50
+for i in range(0, len(missile_positions) - stride, stride):
+    ax.quiver(missile_positions[i, 0], missile_positions[i, 1], missile_positions[i, 2],
+              missile_positions[i + stride, 0] - missile_positions[i, 0],
+              missile_positions[i + stride, 1] - missile_positions[i, 1],
+              missile_positions[i + stride, 2] - missile_positions[i, 2],
+              length=1, color='b', arrow_length_ratio=0.1)
+
+for i in range(0, len(target_positions) - stride, stride):
+    ax.quiver(target_positions[i, 0], target_positions[i, 1], target_positions[i, 2],
+              target_positions[i + stride, 0] - target_positions[i, 0],
+              target_positions[i + stride, 1] - target_positions[i, 1],
+              target_positions[i + stride, 2] - target_positions[i, 2],
+              length=1, color='r', arrow_length_ratio=0.1)
+
+# Mark the point of interception
+if np.linalg.norm(missile_state.position - target_state.position) < 0.1:
+    ax.scatter(missile_state.position[0], missile_state.position[1], missile_state.position[2], c='g', s=100, label='Interception Point')
+
+ax.legend()
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+plt.show()
